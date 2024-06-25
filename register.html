@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="styles.css">
+  <script>
+        function validateForm() {
+            var name = document.forms["registrationForm"]["name"].value.trim();
+            var email = document.forms["registrationForm"]["email"].value.trim();
+            var phone = document.forms["registrationForm"]["phone"].value.trim();
+            var password = document.forms["registrationForm"]["password"].value;
+            var dob = new Date(document.forms["registrationForm"]["dob"].value);
+            var today = new Date();
+            var age = today.getFullYear() - dob.getFullYear();
+            
+            // Check name
+            if (name === "") {
+                alert("Please enter your name.");
+                return false;
+            }
+
+            // Check email
+            if (email === "") {
+                alert("Please enter your email.");
+                return false;
+            } else if (!isValidEmail(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // Check phone number
+            if (phone === "") {
+                alert("Please enter your phone number.");
+                return false;
+            } else if (!isValidPhoneNumber(phone)) {
+                alert("Please enter a valid phone number.");
+                return false;
+            }
+
+        
+            if (password === "") {
+                alert("Please enter a password.");
+                return false;
+            }
+
+    
+            if (age < 20) {
+                alert("You must be at least 20 years old to register.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function isValidEmail(email) {
+            // Simple email validation regex
+            var regex = /\S+@\S+\.\S+/;
+            return regex.test(email);
+        }
+
+        function isValidPhoneNumber(phone) {
+            var regex = /^\d{10}$/;
+            return regex.test(phone);
+        }
+    </script>-
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form name="registrationForm" action="register.php" method="post" onsubmit="return validateForm()">
+        <label for="name">Name:</label><br>
+        <input type="text" name="name"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" name="email"><br>
+
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" name="phone"><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" name="password"><br>
+
+        <label for="qualification">Qualification:</label><br>
+        <select name="qualification">
+            <option value="default" selected>Select</option>
+            <option value="MBA">MBA</option>
+            <option value="Btech">Btech</option>
+            <option value="BE">BE</option>
+            <option value="12">12</option>
+            <option value="10">10</option>
+        </select><br>
+
+        <label for="language">Language:</label><br>
+        <select name="language">
+            <option value="default" selected>Select</option>
+            <option value="English">English</option>
+            <option value="Tamil">Spanish</option>
+            <option value="French">French</option>
+        </select><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" name="dob"><br>
+
+        <input type="submit" value="Register">
+      
+    </form>
+</body>
+</html>
